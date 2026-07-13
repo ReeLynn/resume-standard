@@ -34,7 +34,8 @@
             box-shadow: 0 2px 12px rgba(0,0,0,0.12);
             padding: 26px 36px;
             overflow: hidden;
-            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         /* ===== HEADER ===== */
@@ -124,9 +125,9 @@
         }
 
         /* ===== TWO-COLUMN ===== */
-        .two-col { display: flex; gap: 24px; }
+        .two-col { display: flex; gap: 24px; flex: 1; min-height: 0; }
         .col-main { flex: 3; min-width: 0; }
-        .col-side { flex: 2; min-width: 0; }
+        .col-side { flex: 2; min-width: 0; display: flex; flex-direction: column; }
 
         /* ===== EXPERIENCE ===== */
         .exp-item { margin-bottom: 12px; }
@@ -213,7 +214,7 @@
 
         /* ===== SIDEBAR ===== */
         .side-section { margin-bottom: 16px; }
-        .side-section:last-child { margin-bottom: 0; }
+        .side-section:last-child { margin-bottom: 0; margin-top: auto; }
 
         .side-section .section-title {
             font-size: 12.5px;
