@@ -9,7 +9,7 @@
             --primary: #1a1a2e;
             --text: #333;
             --text-light: #666;
-            --text-muted: #888;
+            --text-muted: #555;
             --border: #e0e0e0;
             --bg-light: #f8f9fa;
             --accent: #2c3e80;
@@ -127,7 +127,7 @@
         /* ===== TWO-COLUMN ===== */
         .two-col { display: flex; gap: 24px; flex: 1; min-height: 0; }
         .col-main { flex: 3; min-width: 0; }
-        .col-side { flex: 2; min-width: 0; display: flex; flex-direction: column; }
+        .col-side { flex: 2; min-width: 0; }
 
         /* ===== EXPERIENCE ===== */
         .exp-item { margin-bottom: 12px; }
@@ -214,7 +214,7 @@
 
         /* ===== SIDEBAR ===== */
         .side-section { margin-bottom: 16px; }
-        .side-section:last-child { margin-bottom: 0; margin-top: auto; }
+        .side-section:last-child { margin-bottom: 0; }
 
         .side-section .section-title {
             font-size: 12.5px;
@@ -500,6 +500,15 @@
                 </section>
 
                 <section class="side-section">
+                    <h2 class="section-title" data-i18n="certTitle">证书与资质</h2>
+                    <div class="cert-item">
+                        <div class="cert-name">CFA Charterholder</div>
+                        <div class="cert-org">Chartered Financial Analyst · CFA Institute</div>
+                        <div class="cert-meta">Member ID: 200191717</div>
+                    </div>
+                </section>
+
+                <section class="side-section">
                     <h2 class="section-title" data-i18n="skillsTitle">专业技能</h2>
                     <div class="skill-group">
                         <div class="skill-group-name" data-i18n="skCat1">编程语言</div>
@@ -553,17 +562,9 @@
                     </div>
                 </section>
 
-                <section class="side-section">
-                    <h2 class="section-title" data-i18n="certTitle">证书与资质</h2>
-                    <div class="cert-item">
-                        <div class="cert-name">CFA Charterholder</div>
-                        <div class="cert-org">Chartered Financial Analyst · CFA Institute</div>
-                        <div class="cert-meta">Member ID: 200191717</div>
-                    </div>
-                </section>
             </div>
         </div>
-    </div>
+    </div><!-- /resume-viewer -->
 
     <!-- ========== PAGE 2: Projects ========== -->
     <div class="page" data-page="2">
