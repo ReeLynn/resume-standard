@@ -292,12 +292,66 @@
 
         .lang-btn.active { background: var(--primary); color: #fff; }
 
+        /* ===== PAGE VIEWER ===== */
+        .resume-viewer { position: relative; }
+
+        .page { display: none; }
+        .page.active { display: flex; }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .pagination-btn {
+            padding: 6px 16px;
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--text);
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .pagination-btn:hover { background: var(--bg-light); }
+        .pagination-btn:disabled { opacity: 0.35; cursor: default; }
+
+        .pagination-dots { display: flex; gap: 8px; align-items: center; }
+
+        .pagination-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.2s;
+        }
+
+        .pagination-dot.active { background: var(--primary); transform: scale(1.3); }
+
+        .pagination-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            min-width: 50px;
+            text-align: center;
+        }
+
         /* ===== PRINT ===== */
         @page { size: A4; margin: 0; }
 
         @media print {
             body { background: #fff; }
+            .resume-viewer { }
             .page {
+                display: flex !important;
                 box-shadow: none;
                 margin: 0;
                 width: 210mm;
@@ -306,6 +360,7 @@
             }
             .page:last-child { page-break-after: auto; }
             .lang-switcher { display: none; }
+            .pagination { display: none; }
         }
 
         @media screen and (max-width: 800px) {
@@ -328,7 +383,8 @@
     </div>
 
     <!-- ========== PAGE 1 ========== -->
-    <div class="page">
+    <div class="resume-viewer">
+    <div class="page active" data-page="1">
         <!-- HEADER -->
         <header class="header">
             <div class="header-photo">
@@ -510,7 +566,7 @@
     </div>
 
     <!-- ========== PAGE 2: Projects ========== -->
-    <div class="page">
+    <div class="page" data-page="2">
         <section class="section">
             <h2 class="section-title" data-i18n="projTitle">项目经历</h2>
 
@@ -546,6 +602,18 @@
                 <p class="proj-desc" data-i18n="proj4Desc">主导券商综合APP及核心交易系统模块开发，搭建GitLab CI/CD流水线实现自动化构建、测试与多平台发布。已上架App Store及各大应用商店，服务数十万用户。采用微服务架构，支持高并发交易请求处理，保障核心交易链路稳定性。</p>
             </div>
         </section>
+    </div>
+    </div><!-- /resume-viewer -->
+
+    <!-- PAGINATION -->
+    <div class="pagination" id="pagination">
+        <button class="pagination-btn" id="btn-prev" disabled data-i18n-prev="上一页" data-i18n-en-prev="Prev">上一页</button>
+        <div class="pagination-dots">
+            <button class="pagination-dot active" data-dot="1"></button>
+            <button class="pagination-dot" data-dot="2"></button>
+        </div>
+        <button class="pagination-btn" id="btn-next" data-i18n-next="下一页" data-i18n-en-next="Next">下一页</button>
+        <span class="pagination-label" id="page-label">1 / 2</span>
     </div>
 
     <script>
@@ -680,6 +748,49 @@
         langBtns.forEach(btn => {
             btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
         });
+
+        // ==== PAGE PAGINATION ====
+        const pages = document.querySelectorAll('.page');
+        const totalPages = pages.length;
+        let currentPage = 1;
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const dots = document.querySelectorAll('.pagination-dot');
+        const pageLabel = document.getElementById('page-label');
+
+        function goToPage(n) {
+            currentPage = n;
+            pages.forEach((p, i) => p.classList.toggle('active', i + 1 === n));
+            dots.forEach((d, i) => d.classList.toggle('active', i + 1 === n));
+            btnPrev.disabled = n === 1;
+            btnNext.disabled = n === totalPages;
+            pageLabel.textContent = n + ' / ' + totalPages;
+        }
+
+        btnPrev.addEventListener('click', () => { if (currentPage > 1) goToPage(currentPage - 1); });
+        btnNext.addEventListener('click', () => { if (currentPage < totalPages) goToPage(currentPage + 1); });
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => goToPage(parseInt(dot.dataset.dot)));
+        });
+
+        // Keyboard nav
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft' && currentPage > 1) goToPage(currentPage - 1);
+            if (e.key === 'ArrowRight' && currentPage < totalPages) goToPage(currentPage + 1);
+        });
+
+        // Extend switchLanguage to also update pagination button text
+        const origSwitch = switchLanguage;
+        switchLanguage = function(lang) {
+            origSwitch(lang);
+            if (lang === 'en') {
+                btnPrev.textContent = btnPrev.getAttribute('data-i18n-en-prev');
+                btnNext.textContent = btnNext.getAttribute('data-i18n-en-next');
+            } else {
+                btnPrev.textContent = btnPrev.getAttribute('data-i18n-prev');
+                btnNext.textContent = btnNext.getAttribute('data-i18n-next');
+            }
+        };
     </script>
 </body>
 </html>
