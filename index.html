@@ -51,14 +51,15 @@
             width: 100px;
             height: 130px;
             border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ccc;
-            font-size: 12px;
             background: var(--bg-light);
-            flex-direction: column;
-            gap: 4px;
+            overflow: hidden;
+        }
+
+        .header-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .header-main {
@@ -392,8 +393,7 @@
         <!-- HEADER -->
         <header class="header">
             <div class="header-photo">
-                <span>📷</span>
-                <span>照片</span>
+                <img src="photo.jpg" alt="尚林 Lynn Sean">
             </div>
             <div class="header-main">
                 <h1>尚林 <span style="font-weight:400;font-size:18px;color:#888;">Lynn Sean</span></h1>
