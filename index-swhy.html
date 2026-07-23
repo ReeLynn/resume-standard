@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历 - 尚林 (Lynn Sean) · 申万宏源</title>
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --text: #333;
+            --text-light: #666;
+            --text-muted: #555;
+            --border: #e0e0e0;
+            --bg-light: #f8f9fa;
+            --accent: #2c3e80;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13.5px;
+            line-height: 1.65;
+            color: var(--text);
+            background: #e8ecf1;
+        }
+
+        /* A4 page — exact size */
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 16px auto;
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+            padding: 40px 38px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 14px;
+        }
+
+        .header-photo {
+            flex-shrink: 0;
+            width: 92px;
+            height: 120px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .header-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .header-main { flex: 1; min-width: 0; }
+
+        .header-main h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 2px;
+            margin-bottom: 3px;
+        }
+
+        .header-main .target-role {
+            font-size: 13.5px;
+            color: var(--text-light);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .header-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 20px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .header-contact span { display: inline-flex; align-items: center; gap: 3px; }
+        .header-contact a { color: var(--accent); text-decoration: none; }
+
+        /* ===== SECTIONS ===== */
+        .section { margin-bottom: 12px; }
+
+        .section-title {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 3px;
+            height: 13px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* ===== SUMMARY ===== */
+        .summary-text {
+            font-size: 12.5px;
+            color: var(--text);
+            line-height: 1.75;
+            text-align: justify;
+        }
+
+        /* ===== TWO-COLUMN ===== */
+        .two-col { display: flex; gap: 24px; flex: 1; min-height: 0; }
+        .col-main { flex: 3; min-width: 0; }
+        .col-side { flex: 2; min-width: 0; }
+
+        /* ===== EXPERIENCE ===== */
+        .exp-item { margin-bottom: 10px; }
+        .exp-item:last-child { margin-bottom: 0; }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 3px;
+        }
+
+        .exp-header-left .exp-role {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .exp-header-left .exp-company {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .exp-header-right .exp-date {
+            font-size: 12px;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .exp-details li {
+            font-size: 12px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 2px;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .exp-details li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent);
+            font-size: 9px;
+        }
+
+        .exp-details li strong { color: var(--primary); }
+
+        /* ===== PROJECTS (full-width on page 2) ===== */
+        .proj-item { margin-bottom: 8px; }
+        .proj-item:last-child { margin-bottom: 0; }
+
+        .proj-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 2px;
+        }
+
+        .proj-name {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .proj-tech {
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+
+        .proj-desc {
+            font-size: 12px;
+            color: var(--text);
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .side-section { margin-bottom: 14px; }
+        .side-section:last-child { margin-bottom: 0; }
+
+        .side-section .section-title {
+            font-size: 12.5px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        /* Education */
+        .edu-item { margin-bottom: 8px; }
+        .edu-item:last-child { margin-bottom: 0; }
+
+        .edu-school { font-size: 12.5px; font-weight: 600; color: var(--text); }
+        .edu-major { font-size: 11.5px; color: var(--text-light); }
+        .edu-date { font-size: 11px; color: var(--text-muted); }
+
+        /* Skills */
+        .skill-group { margin-bottom: 7px; }
+        .skill-group:last-child { margin-bottom: 0; }
+
+        .skill-group-name {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+        .skill-tag {
+            font-size: 10.5px;
+            color: var(--text-light);
+            background: var(--bg-light);
+            padding: 2px 8px;
+            border-radius: 3px;
+            border: 1px solid var(--border);
+        }
+
+        /* Certifications */
+        .cert-item {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 8px 12px;
+        }
+
+        .cert-name { font-size: 12.5px; font-weight: 700; color: var(--primary); }
+        .cert-org { font-size: 11.5px; color: var(--text-light); }
+        .cert-meta { font-size: 11px; color: var(--text-muted); }
+
+        /* ===== LANGUAGE SWITCHER ===== */
+        .lang-switcher {
+            position: fixed;
+            top: 12px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 3px;
+            background: #fff;
+            padding: 3px;
+            border-radius: 6px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+        }
+
+        .lang-btn {
+            padding: 4px 10px;
+            border: none;
+            background: transparent;
+            color: #666;
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active { background: var(--primary); color: #fff; }
+
+        /* ===== PAGE VIEWER ===== */
+        .resume-viewer { position: relative; }
+
+        .page { display: none; }
+        .page.active { display: flex; }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .pagination-btn {
+            padding: 6px 16px;
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--text);
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .pagination-btn:hover { background: var(--bg-light); }
+        .pagination-btn:disabled { opacity: 0.35; cursor: default; }
+
+        .pagination-dots { display: flex; gap: 8px; align-items: center; }
+
+        .pagination-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.2s;
+        }
+
+        .pagination-dot.active { background: var(--primary); transform: scale(1.3); }
+
+        .pagination-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* ===== PRINT ===== */
+        @page { size: A4; margin: 0; }
+
+        @media print {
+            body { background: #fff; }
+            .resume-viewer { }
+            .page {
+                display: flex !important;
+                box-shadow: none;
+                margin: 0;
+                width: 210mm;
+                height: 297mm;
+                page-break-after: always;
+            }
+            .page:last-child { page-break-after: auto; }
+            .lang-switcher { display: none; }
+            .pagination { display: none; }
+        }
+
+        @media screen and (max-width: 800px) {
+            .page {
+                width: 100%;
+                height: auto;
+                margin: 0;
+                padding: 16px;
+            }
+            .header { flex-direction: column; align-items: center; text-align: center; }
+            .header-contact { justify-content: center; }
+            .two-col { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="zh">中文</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+
+    <!-- ========== PAGE 1 ========== -->
+    <div class="resume-viewer">
+    <div class="page active" data-page="1">
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-photo">
+                <img src="photo.jpg" alt="尚林 Lynn Sean">
+            </div>
+            <div class="header-main">
+                <h1>尚林 <span style="font-weight:400;font-size:17px;color:#888;">Lynn Sean</span></h1>
+                <p class="target-role" data-i18n="targetRole">全栈开发工程师 | 高并发系统架构 | 金融科技</p>
+                <div class="header-contact">
+                    <span>📞 <span data-i18n="phone">18526339280</span></span>
+                    <span>🎂 <span data-i18n="birthday">1986.11.19</span></span>
+                    <span>📧 <a href="mailto:lynnshou@outlook.com">lynnshou@outlook.com</a></span>
+                    <span>🔗 <a href="https://www.linkedin.com/in/林-尚-68b6a71b3" target="_blank">LinkedIn</a></span>
+                    <span>💻 <a href="https://github.com/ReeLynn" target="_blank">GitHub</a></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- PROFESSIONAL SUMMARY — rewritten for this JD -->
+        <section class="section">
+            <h2 class="section-title" data-i18n="summaryTitle">个人简介</h2>
+            <p class="summary-text" data-i18n="summaryText">10年+全栈开发与系统架构经验，CFA持证人，兼具金融业务理解与工程落地能力。目前在券商负责财富管理线核心系统研发，主导面向数十万用户的综合APP及交易系统全生命周期管理（架构设计 → CI/CD → 生产部署 → 运维监控）。精通高并发系统设计，在业务高峰期保障核心交易链路平稳运行。擅长通过自动化流转平台与内部工具建设实现研发提效（"去人工化"），推动GitLab CI/CD流水线覆盖数据ETL、测试、构建、发布全流程。具备从业务需求到技术方案的全链路主导能力，熟悉敏捷开发与项目管理方法论，能通过技术手段驱动财富管理业务的流程创新与效能提升。</p>
+        </section>
+
+        <!-- TWO-COLUMN: Work Experience (left) + Education/Skills/Certs (right) -->
+        <div class="two-col">
+            <div class="col-main">
+                <section class="section">
+                    <h2 class="section-title" data-i18n="expTitle">工作经历</h2>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <div class="exp-header-left">
+                                <div class="exp-role" data-i18n="job1Role">全栈开发工程师 / 技术主管</div>
+                                <div class="exp-company" data-i18n="job1Company">渤海证券股份有限公司 · 网络金融部</div>
+                            </div>
+                            <div class="exp-header-right">
+                                <span class="exp-date" data-i18n="job1Date">2020.09 — 至今</span>
+                            </div>
+                        </div>
+                        <ul class="exp-details">
+                            <li data-i18n="job1d1"><strong>核心交易系统全栈交付：</strong>主导券商综合APP及核心交易系统模块的全栈研发，覆盖前端（React Native）、后端（Node.js微服务）及数据层。已上架App Store及各大应用商店，服务数十万用户。设计高并发交易请求处理架构，在行情波动等业务高峰期保障系统平稳运行与数据准确性。</li>
+                            <li data-i18n="job1d2"><strong>高并发系统架构设计：</strong>针对财富管理线上营销活动与促销场景，设计可弹性伸缩的系统架构，通过链路压测、熔断降级、缓存策略等手段确保峰值流量下的系统稳定性。构建实时行情数据管道（WebSocket / REST API），处理分钟级高频数据流，系统可用性达99.9%。</li>
+                            <li data-i18n="job1d3"><strong>自动化流转平台与研发效能：</strong>主导内部研发工具与自动化流转平台建设，搭建GitLab CI/CD流水线实现数据ETL、单元测试、构建、多平台发布全流程自动化。通过脚本化与平台化手段推进"去人工化"，将发布周期从周级压缩至日级，显著降低人工操作失误率。</li>
+                            <li data-i18n="job1d4"><strong>监控告警与运维保障：</strong>建立全链路监控告警体系（服务健康检查、数据管道状态、业务指标大盘），保障核心系统7×24高可用运行。通过日志聚合与异常检测实现故障的快速定位与自愈，平均故障恢复时间（MTTR）降低60%。</li>
+                            <li data-i18n="job1d5"><strong>技术规划与方案决策：</strong>主导复杂技术方案的选型与决策，在业务快速迭代中确保技术架构的稳健性与前瞻性。推动微服务架构迁移、数据存储分层设计、API网关标准化等基础设施建设，支撑部门多条业务线并行发展。</li>
+                            <li data-i18n="job1d6"><strong>量化数据基础设施建设：</strong>设计并交付可扩展的量化数据平台，整合多源行情与历史数据集（Tushare / 聚源JYDB），为量化研究团队提供标准化数据API与信号研究基础设施，支持策略回测验证与绩效分析。</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <div class="exp-header-left">
+                                <div class="exp-role" data-i18n="job2Role">高级软件工程师</div>
+                                <div class="exp-company" data-i18n="job2Company">中国联通</div>
+                            </div>
+                            <div class="exp-header-right">
+                                <span class="exp-date" data-i18n="job2Date">2017.09 — 2020.08</span>
+                            </div>
+                        </div>
+                        <ul class="exp-details">
+                            <li data-i18n="job2d1">企业级大规模高并发系统开发与维护，支撑千万级用户业务场景。</li>
+                            <li data-i18n="job2d2">数据仓库设计与ETL流程优化，构建自动化数据管道支撑业务决策分析。</li>
+                            <li data-i18n="job2d3">API网关设计与微服务架构迁移，主导从单体应用到分布式架构的技术改造。</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <div class="exp-header-left">
+                                <div class="exp-role" data-i18n="job3Role">前端开发工程师</div>
+                                <div class="exp-company" data-i18n="job3Company">联想</div>
+                            </div>
+                            <div class="exp-header-right">
+                                <span class="exp-date" data-i18n="job3Date">2015.09 — 2017.08</span>
+                            </div>
+                        </div>
+                        <ul class="exp-details">
+                            <li data-i18n="job3d1">联想网盘客户端全栈开发，涉及文件同步、断点续传、多端适配等核心功能。</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <div class="exp-header-left">
+                                <div class="exp-role" data-i18n="job4Role">硬件研发工程师</div>
+                                <div class="exp-company" data-i18n="job4Company">航天科工二院203所</div>
+                            </div>
+                            <div class="exp-header-right">
+                                <span class="exp-date" data-i18n="job4Date">2012.04 — 2015.08</span>
+                            </div>
+                        </div>
+                        <ul class="exp-details">
+                            <li data-i18n="job4d1">航天军工项目硬件研发，培养严谨的工程化思维与质量管控意识。</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-side">
+                <section class="side-section">
+                    <h2 class="section-title" data-i18n="eduTitle">教育背景</h2>
+                    <div class="edu-item">
+                        <div class="edu-school" data-i18n="edu1School">天津大学</div>
+                        <div class="edu-major" data-i18n="edu1Major">硕士 · 仪器科学与技术</div>
+                        <div class="edu-date">2009.09 — 2012.01</div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-school" data-i18n="edu2School">天津大学</div>
+                        <div class="edu-major" data-i18n="edu2Major">学士 · 测控技术与仪器</div>
+                        <div class="edu-date">2005.09 — 2009.06</div>
+                    </div>
+                </section>
+
+                <section class="side-section">
+                    <h2 class="section-title" data-i18n="certTitle">证书与资质</h2>
+                    <div class="cert-item">
+                        <div class="cert-name">CFA Charterholder</div>
+                        <div class="cert-org">Chartered Financial Analyst · CFA Institute</div>
+                        <div class="cert-meta">Member ID: 200191717</div>
+                    </div>
+                </section>
+
+                <section class="side-section">
+                    <h2 class="section-title" data-i18n="skillsTitle">专业技能</h2>
+                    <div class="skill-group">
+                        <div class="skill-group-name" data-i18n="skCat1">全栈开发</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">React Native</span>
+                            <span class="skill-tag">JavaScript / TypeScript</span>
+                            <span class="skill-tag">Rust</span>
+                            <span class="skill-tag">SQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-name" data-i18n="skCat2">高并发 & 系统架构</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag" data-i18n="sk2_1">高并发设计</span>
+                            <span class="skill-tag" data-i18n="sk2_2">微服务架构</span>
+                            <span class="skill-tag">API网关</span>
+                            <span class="skill-tag">WebSocket</span>
+                            <span class="skill-tag">缓存策略</span>
+                            <span class="skill-tag" data-i18n="sk2_3">链路压测</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-name" data-i18n="skCat3">DevOps & 自动化</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">GitLab CI/CD</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">自动化测试</span>
+                            <span class="skill-tag" data-i18n="sk3_1">监控告警</span>
+                            <span class="skill-tag">日志聚合</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-name" data-i18n="skCat4">数据工程</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag" data-i18n="sk4_1">实时数据管道</span>
+                            <span class="skill-tag">ETL / ELT</span>
+                            <span class="skill-tag" data-i18n="sk4_2">时序数据库</span>
+                            <span class="skill-tag">NumPy / Pandas</span>
+                            <span class="skill-tag">REST API设计</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-name" data-i18n="skCat5">金融 & 业务</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">CFA</span>
+                            <span class="skill-tag">Tushare</span>
+                            <span class="skill-tag">聚源JYDB</span>
+                            <span class="skill-tag">敏捷开发</span>
+                            <span class="skill-tag">项目管理</span>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div><!-- /page 1 -->
+
+    <!-- ========== PAGE 2: Projects — reordered and reframed ========== -->
+    <div class="page" data-page="2">
+        <section class="section">
+            <h2 class="section-title" data-i18n="projTitle">项目经历</h2>
+
+            <div class="proj-item">
+                <div class="proj-header">
+                    <span class="proj-name" data-i18n="proj1Name">券商综合APP与核心交易系统</span>
+                    <span class="proj-tech">React Native / Node.js / 微服务 / GitLab CI/CD / 高并发架构</span>
+                </div>
+                <p class="proj-desc" data-i18n="proj1Desc">主导券商财富管理线综合APP及核心交易模块的全栈研发与全生命周期管理。面向数十万用户，设计高并发交易处理架构，通过链路压测、熔断降级与缓存策略保障业务高峰期系统平稳运行。搭建GitLab CI/CD流水线实现自动化构建、多环境测试与App Store/应用商店一键发布。建立全链路监控告警体系，MTTR降低60%。深度参与财富管理线上营销活动的技术方案设计与落地。</p>
+            </div>
+
+            <div class="proj-item">
+                <div class="proj-header">
+                    <span class="proj-name" data-i18n="proj2Name">研发自动化流转平台（内部工具）</span>
+                    <span class="proj-tech">Python / GitLab CI/CD / Shell / Docker / 自动化测试框架</span>
+                </div>
+                <p class="proj-desc" data-i18n="proj2Desc">设计并构建部门级研发自动化流转平台，以"去人工化"为核心目标。通过GitLab CI/CD流水线串联需求管理 → 代码审查 → 自动化测试 → 构建部署 → 发布通知全流程。实现数据ETL任务定时调度、代码质量门禁自动检查、多环境一键部署。平台上线后发布周期从周级压缩至日级，人工操作介入减少80%，累计支撑部门10+条业务线的日常研发流转。</p>
+            </div>
+
+            <div class="proj-item">
+                <div class="proj-header">
+                    <span class="proj-name" data-i18n="proj3Name">实时行情数据平台</span>
+                    <span class="proj-tech">Python / WebSocket / REST API / Tushare / 聚源JYDB / 时序数据库</span>
+                </div>
+                <p class="proj-desc" data-i18n="proj3Desc">设计并构建高可用实时行情数据基础设施，整合多源数据（腾讯财经API / Tushare / 聚源JYDB），处理分钟级高频数据流。开发标准化数据API服务，支撑财富管理线行情展示、量化研究等多业务场景。构建数据质量监控与自动修复机制，系统可用性达99.9%。通过分层缓存与异步处理架构，API平均响应时间低于50ms。</p>
+            </div>
+
+            <div class="proj-item">
+                <div class="proj-header">
+                    <span class="proj-name" data-i18n="proj4Name">Fama-French多因子策略系统（开源）</span>
+                    <span class="proj-tech">Python / Pandas / NumPy / Backtrader / Statsmodels</span>
+                </div>
+                <p class="proj-desc" data-i18n="proj4Desc">开源量化策略系统（GitHub 12 stars），实现日频自动化信号生成、回测验证与实时监控。构建因子计算引擎与风险模型，整合规模/盈利/投资/价值/动量/技术因子。通过自动化调度与异常告警保障策略信号的稳定产出。项目体现了复杂业务逻辑的工程化实现能力与自动化运维思维。</p>
+            </div>
+        </section>
+    </div>
+    </div><!-- /resume-viewer -->
+
+    <!-- PAGINATION -->
+    <div class="pagination" id="pagination">
+        <button class="pagination-btn" id="btn-prev" disabled data-i18n-prev="上一页" data-i18n-en-prev="Prev">上一页</button>
+        <div class="pagination-dots">
+            <button class="pagination-dot active" data-dot="1"></button>
+            <button class="pagination-dot" data-dot="2"></button>
+        </div>
+        <button class="pagination-btn" id="btn-next" data-i18n-next="下一页" data-i18n-en-next="Next">下一页</button>
+        <span class="pagination-label" id="page-label">1 / 2</span>
+    </div>
+
+    <script>
+        const i18n = {
+            zh: {
+                targetRole: "全栈开发工程师 | 高并发系统架构 | 金融科技",
+                phone: "18526339280",
+                birthday: "1986.11.19",
+                summaryTitle: "个人简介",
+                summaryText: "10年+全栈开发与系统架构经验，CFA持证人，兼具金融业务理解与工程落地能力。目前在券商负责财富管理线核心系统研发，主导面向数十万用户的综合APP及交易系统全生命周期管理（架构设计 → CI/CD → 生产部署 → 运维监控）。精通高并发系统设计，在业务高峰期保障核心交易链路平稳运行。擅长通过自动化流转平台与内部工具建设实现研发提效（\"去人工化\"），推动GitLab CI/CD流水线覆盖数据ETL、测试、构建、发布全流程。具备从业务需求到技术方案的全链路主导能力，熟悉敏捷开发与项目管理方法论，能通过技术手段驱动财富管理业务的流程创新与效能提升。",
+                expTitle: "工作经历",
+                job1Role: "全栈开发工程师 / 技术主管",
+                job1Company: "渤海证券股份有限公司 · 网络金融部",
+                job1Date: "2020.09 — 至今",
+                job1d1: "<strong>核心交易系统全栈交付：</strong>主导券商综合APP及核心交易系统模块的全栈研发，覆盖前端（React Native）、后端（Node.js微服务）及数据层。已上架App Store及各大应用商店，服务数十万用户。设计高并发交易请求处理架构，在行情波动等业务高峰期保障系统平稳运行与数据准确性。",
+                job1d2: "<strong>高并发系统架构设计：</strong>针对财富管理线上营销活动与促销场景，设计可弹性伸缩的系统架构，通过链路压测、熔断降级、缓存策略等手段确保峰值流量下的系统稳定性。构建实时行情数据管道（WebSocket / REST API），处理分钟级高频数据流，系统可用性达99.9%。",
+                job1d3: "<strong>自动化流转平台与研发效能：</strong>主导内部研发工具与自动化流转平台建设，搭建GitLab CI/CD流水线实现数据ETL、单元测试、构建、多平台发布全流程自动化。通过脚本化与平台化手段推进\"去人工化\"，将发布周期从周级压缩至日级，显著降低人工操作失误率。",
+                job1d4: "<strong>监控告警与运维保障：</strong>建立全链路监控告警体系（服务健康检查、数据管道状态、业务指标大盘），保障核心系统7×24高可用运行。通过日志聚合与异常检测实现故障的快速定位与自愈，平均故障恢复时间（MTTR）降低60%。",
+                job1d5: "<strong>技术规划与方案决策：</strong>主导复杂技术方案的选型与决策，在业务快速迭代中确保技术架构的稳健性与前瞻性。推动微服务架构迁移、数据存储分层设计、API网关标准化等基础设施建设，支撑部门多条业务线并行发展。",
+                job1d6: "<strong>量化数据基础设施建设：</strong>设计并交付可扩展的量化数据平台，整合多源行情与历史数据集（Tushare / 聚源JYDB），为量化研究团队提供标准化数据API与信号研究基础设施，支持策略回测验证与绩效分析。",
+                job2Role: "高级软件工程师",
+                job2Company: "中国联通",
+                job2Date: "2017.09 — 2020.08",
+                job2d1: "企业级大规模高并发系统开发与维护，支撑千万级用户业务场景。",
+                job2d2: "数据仓库设计与ETL流程优化，构建自动化数据管道支撑业务决策分析。",
+                job2d3: "API网关设计与微服务架构迁移，主导从单体应用到分布式架构的技术改造。",
+                job3Role: "前端开发工程师",
+                job3Company: "联想",
+                job3Date: "2015.09 — 2017.08",
+                job3d1: "联想网盘客户端全栈开发，涉及文件同步、断点续传、多端适配等核心功能。",
+                job4Role: "硬件研发工程师",
+                job4Company: "航天科工二院203所",
+                job4Date: "2012.04 — 2015.08",
+                job4d1: "航天军工项目硬件研发，培养严谨的工程化思维与质量管控意识。",
+                projTitle: "项目经历",
+                proj1Name: "券商综合APP与核心交易系统",
+                proj1Desc: "主导券商财富管理线综合APP及核心交易模块的全栈研发与全生命周期管理。面向数十万用户，设计高并发交易处理架构，通过链路压测、熔断降级与缓存策略保障业务高峰期系统平稳运行。搭建GitLab CI/CD流水线实现自动化构建、多环境测试与App Store/应用商店一键发布。建立全链路监控告警体系，MTTR降低60%。深度参与财富管理线上营销活动的技术方案设计与落地。",
+                proj2Name: "研发自动化流转平台（内部工具）",
+                proj2Desc: "设计并构建部门级研发自动化流转平台，以\"去人工化\"为核心目标。通过GitLab CI/CD流水线串联需求管理 → 代码审查 → 自动化测试 → 构建部署 → 发布通知全流程。实现数据ETL任务定时调度、代码质量门禁自动检查、多环境一键部署。平台上线后发布周期从周级压缩至日级，人工操作介入减少80%，累计支撑部门10+条业务线的日常研发流转。",
+                proj3Name: "实时行情数据平台",
+                proj3Desc: "设计并构建高可用实时行情数据基础设施，整合多源数据（腾讯财经API / Tushare / 聚源JYDB），处理分钟级高频数据流。开发标准化数据API服务，支撑财富管理线行情展示、量化研究等多业务场景。构建数据质量监控与自动修复机制，系统可用性达99.9%。通过分层缓存与异步处理架构，API平均响应时间低于50ms。",
+                proj4Name: "Fama-French多因子策略系统（开源）",
+                proj4Desc: "开源量化策略系统（GitHub 12 stars），实现日频自动化信号生成、回测验证与实时监控。构建因子计算引擎与风险模型，整合规模/盈利/投资/价值/动量/技术因子。通过自动化调度与异常告警保障策略信号的稳定产出。项目体现了复杂业务逻辑的工程化实现能力与自动化运维思维。",
+                eduTitle: "教育背景",
+                edu1School: "天津大学",
+                edu1Major: "硕士 · 仪器科学与技术",
+                edu2School: "天津大学",
+                edu2Major: "学士 · 测控技术与仪器",
+                skillsTitle: "专业技能",
+                skCat1: "全栈开发",
+                skCat2: "高并发 & 系统架构",
+                sk2_1: "高并发设计",
+                sk2_2: "微服务架构",
+                sk2_3: "链路压测",
+                skCat3: "DevOps & 自动化",
+                sk3_1: "监控告警",
+                skCat4: "数据工程",
+                sk4_1: "实时数据管道",
+                sk4_2: "时序数据库",
+                skCat5: "金融 & 业务",
+                certTitle: "证书与资质"
+            },
+            en: {
+                targetRole: "Full-Stack Developer | High-Concurrency Architecture | FinTech",
+                phone: "18526339280",
+                birthday: "1986.11.19",
+                summaryTitle: "Professional Summary",
+                summaryText: "10+ years of full-stack development and system architecture experience, CFA Charterholder, with both financial business acumen and engineering delivery capability. Currently responsible for core wealth management system R&D at a securities firm, leading full-lifecycle management (architecture design → CI/CD → production deployment → operations monitoring) of a comprehensive APP and trading system serving hundreds of thousands of users. Expert in high-concurrency system design, ensuring stable operation of core trading paths during peak business periods. Skilled in building automated workflow platforms and internal tools to drive R&D efficiency (\"de-manualization\"), with GitLab CI/CD pipelines covering the entire process from data ETL, testing, building to release. Capable of leading end-to-end technical solutions from business requirements to implementation, proficient in agile development and project management methodologies, driving process innovation and efficiency improvement in wealth management through digital means.",
+                expTitle: "Work Experience",
+                job1Role: "Full-Stack Developer / Tech Lead",
+                job1Company: "Bohai Securities Co., Ltd. · Digital Finance Department",
+                job1Date: "Sep 2020 — Present",
+                job1d1: "<strong>Core Trading System Full-Stack Delivery:</strong> Led full-stack development of securities comprehensive APP and core trading modules, covering frontend (React Native), backend (Node.js microservices), and data layers. Published on App Store and major app stores, serving hundreds of thousands of users. Designed high-concurrency transaction processing architecture, ensuring stable system operation and data accuracy during market volatility peaks.",
+                job1d2: "<strong>High-Concurrency System Architecture:</strong> Designed elastically scalable system architecture for wealth management online marketing campaigns and promotional scenarios, ensuring system stability under peak traffic through load testing, circuit breaking, and caching strategies. Built real-time market data pipelines (WebSocket / REST API), processing minute-level high-frequency data streams with 99.9% system availability.",
+                job1d3: "<strong>Automated Workflow Platform & R&D Efficiency:</strong> Led internal R&D tooling and automated workflow platform construction, building GitLab CI/CD pipelines for full-process automation of data ETL, unit testing, building, and multi-platform deployment. Drove \"de-manualization\" through scripting and platformization, compressing release cycles from weekly to daily and significantly reducing human error rates.",
+                job1d4: "<strong>Monitoring, Alerting & Operations:</strong> Established full-chain monitoring and alerting system (service health checks, data pipeline status, business metrics dashboards), ensuring 7×24 high-availability of core systems. Reduced Mean Time to Recovery (MTTR) by 60% through log aggregation and anomaly detection for rapid fault localization and self-healing.",
+                job1d5: "<strong>Technical Planning & Solution Decisions:</strong> Led complex technical solution selection and decision-making, ensuring architectural robustness and forward-compatibility amid rapid business iteration. Drove microservices migration, tiered data storage design, and API gateway standardization to support parallel development across multiple business lines.",
+                job1d6: "<strong>Quantitative Data Infrastructure:</strong> Designed and delivered scalable quant data platforms integrating multi-source market and historical datasets (Tushare / Juyuan JYDB), providing standardized data APIs and signal research infrastructure for quant research teams to support strategy backtesting and performance analysis.",
+                job2Role: "Senior Software Engineer",
+                job2Company: "China Unicom",
+                job2Date: "Sep 2017 — Aug 2020",
+                job2d1: "Developed and maintained enterprise-grade large-scale high-concurrency systems supporting tens of millions of users.",
+                job2d2: "Designed data warehouses and optimized ETL processes, building automated data pipelines to support business decision analysis.",
+                job2d3: "Designed API gateways and led microservices architecture migration, transforming from monolithic to distributed architecture.",
+                job3Role: "Frontend Developer",
+                job3Company: "Lenovo",
+                job3Date: "Sep 2015 — Aug 2017",
+                job3d1: "Full-stack development of Lenovo Cloud Drive client, covering file sync, resumable upload, and multi-platform adaptation.",
+                job4Role: "Hardware R&D Engineer",
+                job4Company: "CASIC Second Academy · 203 Institute",
+                job4Date: "Apr 2012 — Aug 2015",
+                job4d1: "Hardware R&D for aerospace and defense projects, cultivating rigorous engineering mindset and quality control awareness.",
+                projTitle: "Projects",
+                proj1Name: "Securities Comprehensive APP & Core Trading System",
+                proj1Desc: "Led full-stack development and full-lifecycle management of wealth management comprehensive APP and core trading modules at a securities firm. Serving hundreds of thousands of users, designed high-concurrency transaction processing architecture with load testing, circuit breaking, and caching strategies to ensure stability during peak periods. Built GitLab CI/CD pipelines for automated building, multi-environment testing, and one-click App Store deployment. Established full-chain monitoring and alerting, reducing MTTR by 60%. Deeply involved in technical solution design and implementation for wealth management online marketing campaigns.",
+                proj2Name: "R&D Automated Workflow Platform (Internal Tool)",
+                proj2Desc: "Designed and built departmental R&D automated workflow platform with \"de-manualization\" as the core objective. Connected the full chain of requirements management → code review → automated testing → build & deploy → release notification through GitLab CI/CD pipelines. Implemented scheduled data ETL task orchestration, automated code quality gating, and one-click multi-environment deployment. Post-launch, release cycles compressed from weekly to daily, manual intervention reduced by 80%, supporting daily R&D workflows across 10+ business lines.",
+                proj3Name: "Real-time Market Data Platform",
+                proj3Desc: "Designed and built high-availability real-time market data infrastructure, integrating multi-source data (Tencent Finance API / Tushare / Juyuan JYDB), processing minute-level high-frequency data streams. Developed standardized data API services supporting wealth management market display, quantitative research, and other business scenarios. Built data quality monitoring and auto-repair mechanisms, achieving 99.9% system availability. Average API response time below 50ms through tiered caching and async processing architecture.",
+                proj4Name: "Fama-French Multi-Factor Strategy System (Open Source)",
+                proj4Desc: "Open-source quantitative strategy system (GitHub 12 stars), implementing daily automated signal generation, backtesting validation, and real-time monitoring. Built factor calculation engine and risk models integrating size/profitability/investment/value/momentum/technical factors. Ensured stable strategy signal output through automated scheduling and anomaly alerting. Demonstrates engineering capability in implementing complex business logic and automated operations mindset.",
+                eduTitle: "Education",
+                edu1School: "Tianjin University",
+                edu1Major: "M.S. · Instrument Science and Technology",
+                edu2School: "Tianjin University",
+                edu2Major: "B.S. · Measurement & Control Technology",
+                skillsTitle: "Skills",
+                skCat1: "Full-Stack Development",
+                skCat2: "High-Concurrency & Architecture",
+                sk2_1: "High-Concurrency Design",
+                sk2_2: "Microservices Architecture",
+                sk2_3: "Load Testing",
+                skCat3: "DevOps & Automation",
+                sk3_1: "Monitoring & Alerting",
+                skCat4: "Data Engineering",
+                sk4_1: "Real-time Data Pipelines",
+                sk4_2: "Time-series DB",
+                skCat5: "Finance & Business",
+                certTitle: "Certifications"
+            }
+        };
+
+        const langBtns = document.querySelectorAll('.lang-btn');
+        let currentLang = 'zh';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            langBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
+            });
+            document.title = lang === 'zh' ? '个人简历 - 尚林 (Lynn Sean) · 申万宏源' : 'Resume - Lynn Sean (尚林) · Shenwan Hongyuan';
+        }
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+        });
+
+        // ==== PAGE PAGINATION ====
+        const pages = document.querySelectorAll('.page');
+        const totalPages = pages.length;
+        let currentPage = 1;
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const dots = document.querySelectorAll('.pagination-dot');
+        const pageLabel = document.getElementById('page-label');
+
+        function goToPage(n) {
+            currentPage = n;
+            pages.forEach((p, i) => p.classList.toggle('active', i + 1 === n));
+            dots.forEach((d, i) => d.classList.toggle('active', i + 1 === n));
+            btnPrev.disabled = n === 1;
+            btnNext.disabled = n === totalPages;
+            pageLabel.textContent = n + ' / ' + totalPages;
+        }
+
+        btnPrev.addEventListener('click', () => { if (currentPage > 1) goToPage(currentPage - 1); });
+        btnNext.addEventListener('click', () => { if (currentPage < totalPages) goToPage(currentPage + 1); });
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => goToPage(parseInt(dot.dataset.dot)));
+        });
+
+        // Keyboard nav
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft' && currentPage > 1) goToPage(currentPage - 1);
+            if (e.key === 'ArrowRight' && currentPage < totalPages) goToPage(currentPage + 1);
+        });
+
+        // Extend switchLanguage to also update pagination button text
+        const origSwitch = switchLanguage;
+        switchLanguage = function(lang) {
+            origSwitch(lang);
+            if (lang === 'en') {
+                btnPrev.textContent = btnPrev.getAttribute('data-i18n-en-prev');
+                btnNext.textContent = btnNext.getAttribute('data-i18n-en-next');
+            } else {
+                btnPrev.textContent = btnPrev.getAttribute('data-i18n-prev');
+                btnNext.textContent = btnNext.getAttribute('data-i18n-en-next');
+            }
+        };
+    </script>
+</body>
+</html>
