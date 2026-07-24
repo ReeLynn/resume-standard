@@ -125,7 +125,7 @@
         }
 
         /* ===== TWO-COLUMN ===== */
-        .two-col { display: flex; gap: 24px; flex: 1; min-height: 0; }
+        .two-col { display: flex; gap: 24px; min-height: 0; }
         .col-main { flex: 3; min-width: 0; }
         .col-side { flex: 2; min-width: 0; }
 
@@ -544,45 +544,36 @@
 
             </div>
         </div>
-    </div><!-- /page 1 -->
-
-    <!-- ========== PAGE 2: Projects — reordered and reframed ========== -->
-    <div class="page" data-page="2">
-        <section class="section">
+                <section class="section" style="margin-top:6px;">
             <h2 class="section-title" data-i18n="projTitle">项目经历</h2>
-
-            <div class="proj-item">
+<div class="proj-item">
                 <div class="proj-header">
                     <span class="proj-name" data-i18n="proj1Name">券商综合APP与核心交易系统</span>
                     <span class="proj-tech">iOS / Android / HarmonyOS · 微服务 · GitLab CI/CD · 高并发架构</span>
                 </div>
                 <p class="proj-desc" data-i18n="proj1Desc">主导券商财富管理线综合APP及核心交易模块的全栈研发与全生命周期管理。面向数十万用户，设计高并发交易处理架构，通过链路压测、熔断降级与缓存策略保障业务高峰期系统平稳运行。搭建GitLab CI/CD流水线实现自动化构建、多环境测试与App Store/应用商店一键发布。建立全链路监控告警体系，MTTR降低60%。深度参与财富管理线上营销活动的技术方案设计与落地。</p>
             </div>
-
-            <div class="proj-item">
+<div class="proj-item">
                 <div class="proj-header">
                     <span class="proj-name" data-i18n="proj2Name">研发自动化流转平台（内部工具）</span>
                     <span class="proj-tech">Python / GitLab CI/CD / Shell / Docker / 自动化测试框架</span>
                 </div>
                 <p class="proj-desc" data-i18n="proj2Desc">设计并构建部门级研发自动化流转平台，以"去人工化"为核心目标。通过GitLab CI/CD流水线串联需求管理 → 代码审查 → 自动化测试 → 构建部署 → 发布通知全流程。实现数据ETL任务定时调度、代码质量门禁自动检查、多环境一键部署。平台上线后发布周期从周级压缩至日级，人工操作介入减少80%，累计支撑部门10+条业务线的日常研发流转。</p>
             </div>
-
-            <div class="proj-item">
+<div class="proj-item">
                 <div class="proj-header">
                     <span class="proj-name" data-i18n="proj3Name">实时行情数据平台</span>
                     <span class="proj-tech">Python / WebSocket / REST API / Tushare / 聚源JYDB / 时序数据库</span>
                 </div>
                 <p class="proj-desc" data-i18n="proj3Desc">设计并构建高可用实时行情数据基础设施，整合多源数据（腾讯财经API / Tushare / 聚源JYDB），处理分钟级高频数据流。开发标准化数据API服务，支撑财富管理线行情展示、量化研究等多业务场景。构建数据质量监控与自动修复机制，系统可用性达99.9%。通过分层缓存与异步处理架构，API平均响应时间低于50ms。</p>
             </div>
-
-            <div class="proj-item">
+<div class="proj-item">
                 <div class="proj-header">
                     <span class="proj-name" data-i18n="proj4Name">Fama-French多因子策略系统（开源）</span>
                     <span class="proj-tech">Python / Pandas / NumPy / Backtrader / Statsmodels</span>
                 </div>
                 <p class="proj-desc" data-i18n="proj4Desc">开源量化策略系统（GitHub 12 stars），实现日频自动化信号生成、回测验证与实时监控。构建因子计算引擎与风险模型，整合规模/盈利/投资/价值/动量/技术因子。通过自动化调度与异常告警保障策略信号的稳定产出。项目体现了复杂业务逻辑的工程化实现能力与自动化运维思维。</p>
             </div>
-
             <div class="proj-item">
                 <div class="proj-header">
                     <span class="proj-name" data-i18n="proj5Name">全链路监控告警体系</span>
@@ -618,6 +609,15 @@
                 </div>
                 <p class="proj-desc" data-i18n="proj9Desc">负责联想网盘客户端全栈开发，实现文件同步、断点续传、多端适配等核心功能。覆盖桌面端与移动端，保障大文件传输的稳定性与数据一致性。</p>
             </div>
+        </section>
+    </div><!-- /page 1 -->
+
+    <!-- ========== PAGE 2: Projects — reordered and reframed ========== -->
+    
+    <div class="page" data-page="2">
+        <section class="section">
+            <h2 class="section-title" data-i18n="projTitle">项目经历</h2>
+
         </section>
     </div>
     </div><!-- /resume-viewer -->
